@@ -7,8 +7,11 @@ endif
 lint:
 	uv run ruff check
 
+lint-fix:
+	uv run ruff check --fix
+
 format:
-	uv run ruff fix
+	uv run ruff format
 
 run:
 	uv run main.py $(RUN_ARGS)
