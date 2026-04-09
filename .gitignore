@@ -80,6 +80,9 @@ Thumbs.db
 .cache/
 .pyre/
 __pypackages__/
+__pycache__/
+*.py[cod]
+
 
 # Optional: packaging by Poetry
 .poetry/
