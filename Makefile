@@ -13,5 +13,8 @@ lint-fix:
 format:
 	uv run ruff format
 
+type-check:
+	uv run mypy main.py
+
 run:
 	uv run main.py $(RUN_ARGS)
