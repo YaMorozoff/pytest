@@ -13,7 +13,7 @@ lint-fix:
 format:
 	uv run ruff format
 
-type-check:
+mypy:
 	uv run mypy main.py
 
 run:

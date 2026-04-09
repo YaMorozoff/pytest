@@ -19,20 +19,20 @@ class Unit(Enum):
     TEMPERATURE = "temperature"
 
 
-UnitMapping = Dict[Unit, Dict[str,  Tuple[float, float]]]
+UnitMapping = Dict[Unit, Dict[str, Tuple[float, float]]]
 
 unit_values: UnitMapping = {
     Unit.DISTANCE: {
         "mm": (0.01, 0.0),
         "sm": (0.1, 0.0),
-        "m":  (1.0, 0.0),
+        "m": (1.0, 0.0),
         "km": (1000.0, 0.0),
     },
     Unit.WEIGHT: {
         "mg": (0.1, 0.0),
-        "g":  (1.0, 0.0),
+        "g": (1.0, 0.0),
         "kg": (1000.0, 0.0),
-        "t":  (1_000_000.0, 0.0),
+        "t": (1_000_000.0, 0.0),
     },
     Unit.SPEED: {
         "m/s": (1.0, 0.0),
@@ -44,7 +44,6 @@ unit_values: UnitMapping = {
         "k": (1.0, -273.15),
     },
 }
-
 
 
 @dataclass
@@ -84,19 +83,19 @@ def get_current_unit(unit):
 
 
 def convert(data: ConverterReq) -> ConverterRes:
-    current_cat:Unit = get_current_unit(data.from_unit)
+    current_cat: Unit = get_current_unit(data.from_unit)
     current_cat_values = unit_values[current_cat]
-   
+
     if current_cat is Unit.TEMPERATURE:
         mul_from, add_from = current_cat_values[data.from_unit]
         celsius = mul_from * float(data.value) + add_from
         mul_to, add_to = current_cat_values[data.to_unit]
 
         return ConverterRes((celsius - add_to) / mul_to, data.to_unit)
-    
-    factor_from,add_from = current_cat_values[data.from_unit]
-    factor_to,add_to = current_cat_values[data.to_unit]
-    value_in_base = float(data.value) * factor_from 
+
+    factor_from, add_from = current_cat_values[data.from_unit]
+    factor_to, add_to = current_cat_values[data.to_unit]
+    value_in_base = float(data.value) * factor_from
     return ConverterRes(value_in_base / factor_to, data.to_unit)
 
 
