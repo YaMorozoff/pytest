@@ -1,4 +1,4 @@
-from src.converter.converter import start_converter
+from src.converter import start_converter
 
 
 def main(args=None):

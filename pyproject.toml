@@ -6,7 +6,9 @@ readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
     "mypy>=1.20.0",
+    "pydantic>=2.13.0",
     "ruff>=0.15.9",
+    "sqlalchemy>=2.0.49",
 ]
 
 [tool.ruff]
@@ -14,8 +16,6 @@ line-length = 88
 target-version = "py314"
 
 [tool.ruff.lint]
-select = ["E", "F", "I"]
-ignore = ["E501"]
 
 [tool.ruff.format]
 quote-style = "double"
