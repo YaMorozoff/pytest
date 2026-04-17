@@ -9,6 +9,12 @@ services:
     ports:
       - "5432:5432"
     restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB} || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
 
   pgadmin:
     container_name: pgadmin
@@ -19,3 +25,20 @@ services:
     ports:
       - "5050:80"
     restart: always
+    
+  web:                       # ваш FastAPI сервис
+    build:
+      context: .        # папка с Dockerfile для вашего приложения
+    container_name: myapp
+    command: uv run main.py
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql+psycopg2://${POSTGRES_USER}:${POSTGRES_PW}@postgres:5432/${POSTGRES_DB}
+      - OTHER_ENV=...
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: on-failure
+    volumes:
+      - ./app:/app  

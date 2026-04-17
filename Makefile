@@ -17,4 +17,4 @@ mypy:
 	uv run mypy main.py
 
 run:
-	uv run main.py $(RUN_ARGS)
+	uv run app/main.py $(RUN_ARGS)

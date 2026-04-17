@@ -2,7 +2,7 @@ from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from sqlalchemy.orm import Session
 
 from app import models
-from app.scemas import UserBase
+from app.schemas import UserBase
 
 
 def get_user(db: Session, user_id: int):
@@ -14,7 +14,7 @@ def get_user_by_email(db: Session, email: str):
 
 
 def create_user(db: Session, user:UserBase)->UserBase:
-    db_user = models.User(name=user.name, email=user.emal)
+    db_user = models.User(name=user.name, email=user.email, telephone=user.telephone)
 
     try:
         db.add(db_user)
