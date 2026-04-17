@@ -1,20 +1,20 @@
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from sqlalchemy.orm import Session
 
-from app import models
-from app.schemas import UserBase
+from models import User, Product, Order, OrderStatus
+from schemas import UserBase
 
 
 def get_user(db: Session, user_id: int):
-    return db.get(models.User, user_id)
+    return db.get(User, user_id)
 
 
 def get_user_by_email(db: Session, email: str):
-    return db.query(models.User).filter(models.User.email == email).first()
+    return db.query(User).filter(User.email == email).first()
 
 
 def create_user(db: Session, user:UserBase)->UserBase:
-    db_user = models.User(name=user.name, email=user.email, telephone=user.telephone)
+    db_user = User(name=user.name, email=user.email, telephone=user.telephone)
 
     try:
         db.add(db_user)
@@ -27,7 +27,7 @@ def create_user(db: Session, user:UserBase)->UserBase:
 
 
 def update_user(db: Session, user_id: int, user)->bool:
-    user = db.get(models.User, user_id)
+    user = db.get(User, user_id)
     if not user:
         return False
 
@@ -47,7 +47,7 @@ def update_user(db: Session, user_id: int, user)->bool:
 
 
 def delete_user(db: Session, user_id: int) -> bool:
-    user = db.get(models.User, user_id)
+    user = db.get(User, user_id)
     if not user:
         return False
     try:

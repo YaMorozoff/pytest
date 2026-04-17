@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Enum as SQLEnum, Integer, String, Text, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, Mapped, relationship
-from .database import Base
+from database import Base
 from enum import Enum
 
 class OrderStatus(str,Enum):

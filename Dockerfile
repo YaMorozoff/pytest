@@ -15,14 +15,15 @@ ENV PATH="/root/.local/bin:$PATH"
 # Create app directory and set permissions
 WORKDIR /app
 
+COPY . .
 # Copy dependency files first for caching
-COPY pyproject.toml uv.lock ./
+# COPY pyproject.toml uv.lock ./
 
 # Install dependencies using uv
 RUN uv sync --frozen --no-install-project --no-dev --python-preference=only-system
 
 # Copy the rest of the project files
-COPY . .
+
 
 # Run the FastAPI application
 CMD ["make", "run"]

@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from database import engine, Base
-from routers.users import users
+from routers.users import router
 
 
 def main(args=None):
@@ -8,7 +8,7 @@ def main(args=None):
 
     app = FastAPI(title="FastAPI + SQLAlchemy + Alembic example")
 
-    app.include_router(users.router)
+    app.include_router(router)
     # app.include_router(products.router)
     # app.include_router(orders.router)
 
