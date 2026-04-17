@@ -12,8 +12,6 @@ dependencies = [
     "ruff>=0.15.9",
     "sqlalchemy>=2.0.49",
 ]
-[project.scripts]
-pytest = "app.main"
 
 [tool.ruff]
 line-length = 88
