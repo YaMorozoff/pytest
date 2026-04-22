@@ -1,13 +1,10 @@
 import argparse
 import uvicorn
 from fastapi import FastAPI
-from database import engine, Base
 from routers.users import router
 
 app = FastAPI(title="FastAPI + SQLAlchemy + Alembic example")
 app.include_router(router)
-
-Base.metadata.create_all(bind=engine)
 
 
 if __name__ == "__main__":
