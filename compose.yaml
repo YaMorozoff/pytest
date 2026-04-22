@@ -30,7 +30,7 @@ services:
     build:
       context: .        # папка с Dockerfile для вашего приложения
     container_name: myapp
-    command: uv run main.py
+    command: uv run app/main.py --port 8000 --host 0.0.0.0
     ports:
       - "8000:8000"
     environment:
@@ -41,4 +41,4 @@ services:
         condition: service_healthy
     restart: on-failure
     volumes:
-      - ./app:/app  
+      - ./:/workspace  

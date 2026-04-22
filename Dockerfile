@@ -13,17 +13,17 @@ RUN curl -LsSf -o /tmp/install_uv.sh https://astral.sh/uv/install.sh && \
 ENV PATH="/root/.local/bin:$PATH"
 
 # Create app directory and set permissions
-WORKDIR /app
+WORKDIR /workspace
 
 COPY . .
 # Copy dependency files first for caching
 # COPY pyproject.toml uv.lock ./
 
 # Install dependencies using uv
-RUN uv sync --frozen --no-install-project --no-dev --python-preference=only-system
+RUN uv sync --frozen --no-cache
 
 # Copy the rest of the project files
 
 
 # Run the FastAPI application
-CMD ["make", "run"]
+# CMD ["make", "run"]
