@@ -1,7 +1,6 @@
 import argparse
 import uvicorn
 from fastapi import FastAPI
-from database import engine, Base
 from routers.users import users_router
 from routers.products import products_router
 from routers.orders import orders_router
@@ -10,8 +9,6 @@ app = FastAPI(title="FastAPI + SQLAlchemy + Alembic example")
 app.include_router(users_router)
 app.include_router(products_router)
 app.include_router(orders_router)
-
-Base.metadata.create_all(bind=engine)
 
 
 if __name__ == "__main__":

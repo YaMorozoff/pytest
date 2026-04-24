@@ -44,6 +44,7 @@ class OrderUpdate(BaseModel):
 class ProductBase(BaseModel):
     name: str
     description: str | None = None
+    description: str | None = None
     price: int  
 
 class Product(ProductBase):

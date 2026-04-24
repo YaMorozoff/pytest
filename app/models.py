@@ -22,6 +22,7 @@ class Product(Base):
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String(256), nullable=False)
     description = Column(Text, nullable=True)
+    group = Column(String(128), nullable=True)
     price = Column(Integer, nullable=False)
 
 class Order(Base):
