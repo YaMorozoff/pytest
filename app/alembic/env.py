@@ -3,7 +3,9 @@ import os
 from sqlalchemy import create_engine
 from alembic import context
 
-from app.database import Base
+from database import Base
+from models import User, Product, Order
+
 
 config = context.config
 fileConfig(config.config_file_name)
