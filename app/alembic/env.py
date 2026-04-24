@@ -10,10 +10,12 @@ from models import User, Product, Order
 config = context.config
 fileConfig(config.config_file_name)
 
-# импорт Base из вашего приложения
 target_metadata = Base.metadata
 
+print("----------------------------------------->",list(target_metadata.tables.keys()))
+
 url = os.getenv("DATABASE_URL", "postgresql+psycopg2://postgres:postgres@postgres:5432/myapp")
+
 
 def run_migrations_offline():
   

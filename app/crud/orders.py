@@ -2,14 +2,14 @@
 
 from sqlalchemy.exc import SQLAlchemyError
 
-from app import models
+from models import Order
 
 
 def get_order(db, order_id):
-    return db.get(models.Order, order_id)
+    return db.get(Order, order_id)
 
 def create_order(db, order):
-    db_order = models.Order(user_id=order.user_id, product_id=order.product_id, quantity=order.quantity)
+    db_order = Order(user_id=order.user_id, product_id=order.product_id, quantity=order.quantity)
     try:
         db.add(db_order)
         db.commit()
@@ -20,7 +20,7 @@ def create_order(db, order):
         raise   
 
 def update_order(db, order_id, order)->bool:
-    order = db.get(models.Order, order_id)
+    order = db.get(Order, order_id)
     if not order:
         return False
 
@@ -38,7 +38,7 @@ def update_order(db, order_id, order)->bool:
         raise
 
 def delete_order(db, order_id) -> bool:
-    order = db.get(models.Order, order_id)
+    order = db.get(Order, order_id)
     if not order:
         return False
     try:

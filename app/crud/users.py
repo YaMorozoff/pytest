@@ -1,7 +1,7 @@
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from sqlalchemy.orm import Session
 
-from models import User, Product, Order, OrderStatus
+from models import User
 from schemas import UserBase
 
 

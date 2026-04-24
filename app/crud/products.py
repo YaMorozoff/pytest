@@ -2,14 +2,15 @@
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import Session
 
-from app import models
+from models import Product
+from schemas import ProductBase
 
 
 def get_product(db: Session, product_id: int):
-    return db.get(models.Product, product_id)
+    return db.get(Product, product_id)
 
-def create_product(db: Session, product)->models.Product:
-    db_product = models.Product(name=product.name, description=product.description, price=product.price)
+def create_product(db: Session, product: ProductBase) -> Product:
+    db_product = Product(name=product.name, description=product.description, price=product.price)
     try:
         db.add(db_product)
         db.commit()
@@ -19,8 +20,8 @@ def create_product(db: Session, product)->models.Product:
         db.rollback()
         raise
 
-def update_product(db: Session, product_id: int, product)->bool:
-    product = db.get(models.Product, product_id)
+def update_product(db: Session, product_id: int, product: ProductBase) -> bool:
+    product = db.get(Product, product_id)
     if not product:
         return False
 
@@ -38,7 +39,7 @@ def update_product(db: Session, product_id: int, product)->bool:
         raise
 
 def delete_product(db: Session, product_id: int) -> bool:
-    product = db.get(models.Product, product_id)
+    product = db.get(Product, product_id)
     if not product:
         return False
     try:

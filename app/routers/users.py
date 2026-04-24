@@ -1,4 +1,3 @@
-from app import routers
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from crud.users import get_user, get_user_by_email, create_user, update_user, delete_user
