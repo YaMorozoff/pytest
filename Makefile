@@ -17,4 +17,7 @@ mypy:
 	uv run mypy main.py
 
 run:
-	uv run main.py $(RUN_ARGS)
+	uv run app/main.py $(RUN_ARGS)
+
+run-docker:
+	uv run app/main.py --port 80 --host 0.0.0.0
