@@ -1,15 +1,21 @@
 [project]
-name = "pytest"
+name = "my-fastapi-app"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
     "alembic>=1.18.4",
+    "bcrypt>=5.0.0",
     "fastapi>=0.135.3",
+    "httpx>=0.28.1",
     "mypy>=1.20.0",
+    "passlib[bcrypt]>=1.7.4",
     "psycopg2-binary>=2.9.11",
     "pydantic[email]>=2.13.0",
+    "pytest>=9.0.3",
+    "python-jose[cryptography]>=3.5.0",
+    "python-multipart>=0.0.28",
     "ruff>=0.15.9",
     "sqlalchemy>=2.0.49",
     "uvicorn>=0.34.0",

@@ -4,11 +4,13 @@ from fastapi import FastAPI
 from routers.users import users_router
 from routers.products import products_router
 from routers.orders import orders_router
+from routers.auth import auth_router
 
 app = FastAPI(title="FastAPI + SQLAlchemy + Alembic example")
 app.include_router(users_router)
 app.include_router(products_router)
 app.include_router(orders_router)
+app.include_router(auth_router)
 
 
 if __name__ == "__main__":

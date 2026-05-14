@@ -9,13 +9,30 @@ class OrderStatus(str,Enum):
     completed = "completed"
     cancelled = "cancelled"
 
+
 class User(Base):
     __tablename__ = "users"
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String(128), nullable=False)
     email = Column(String(256), unique=True, index=True, nullable=False)
     telephone = Column(String(20), nullable=True)
-    orders = relationship("Order", back_populates="user", cascade="all, delete-orphan")
+    hashed_password = Column(String, nullable=False) 
+    orders = relationship("Order", back_populates="user_owner")
+
+class Order(Base):
+    __tablename__ = "orders"
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id", ondelete="SET NULL"))
+    product_id = Column(Integer, ForeignKey("products.id", ondelete="SET NULL"))
+    quantity = Column(Integer, nullable=False)
+    user_owner = relationship("User", back_populates="orders") 
+    product_details = relationship("Product")
+    status: Mapped[OrderStatus] = mapped_column(
+        SQLEnum(OrderStatus, name="order_status_enum"),
+        nullable=False,
+        default=OrderStatus.pending 
+    )
+
 
 class Product(Base):
     __tablename__ = "products"
@@ -25,18 +42,6 @@ class Product(Base):
     group = Column(String(128), nullable=True)
     price = Column(Integer, nullable=False)
 
-class Order(Base):
-    __tablename__ = "orders"
-    id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(Integer, ForeignKey("users.id", ondelete="SET NULL"))
-    product_id = Column(Integer, ForeignKey("products.id", ondelete="SET NULL"))
-    quantity = Column(Integer, nullable=False)
-    user = relationship("User")
-    product = relationship("Product")
-    status: Mapped[OrderStatus] = mapped_column(
-        SQLEnum(OrderStatus, name="order_status_enum"),
-        nullable=False,
-        server_default=OrderStatus.pending.value
-    )
+\
 
 
